@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
@@ -45,35 +46,53 @@ export default function DonorForm() {
     e.preventDefault();
     setFormState(prev => ({ ...prev, submitting: true }));
     
-    // Create donor data object with current date and available status
-    const donorData = {
-      ...formState,
-      lastDonation: formState.lastDonation || new Date().toISOString().split('T')[0],
-      status: 'available'
-    };
-    
-    // Store in localStorage for now (in a real app, this would go to a database)
-    const existingDonors = JSON.parse(localStorage.getItem('donors') || '[]');
-    const updatedDonors = [...existingDonors, {
-      id: Date.now(), // Generate a simple ID
-      name: donorData.name,
-      bloodType: donorData.bloodType,
-      location: donorData.address,
-      lastDonation: donorData.lastDonation,
-      contactNumber: donorData.phone,
-      status: donorData.status
-    }];
-    
-    localStorage.setItem('donors', JSON.stringify(updatedDonors));
-    
-    // Show success toast
-    toast({
-      title: "Registration successful!",
-      description: "Thank you for registering as a blood donor.",
-    });
-    
-    // Redirect to inventory page
-    navigate('/inventory');
+    try {
+      // Create donor data object with current date and available status
+      const donorData = {
+        name: formState.name,
+        email: formState.email,
+        phone: formState.phone,
+        address: formState.address,
+        blood_type: formState.bloodType,
+        age: parseInt(formState.age),
+        last_donation: formState.lastDonation || new Date().toISOString().split('T')[0],
+        medical_conditions: formState.medicalConditions,
+        status: 'available'
+      };
+      
+      // Store in Supabase
+      const { error } = await supabase
+        .from('donors')
+        .insert(donorData);
+      
+      if (error) {
+        console.error('Error inserting donor:', error);
+        toast({
+          title: "Registration failed",
+          description: error.message,
+          variant: "destructive"
+        });
+        setFormState(prev => ({ ...prev, submitting: false }));
+        return;
+      }
+      
+      // Show success toast
+      toast({
+        title: "Registration successful!",
+        description: "Thank you for registering as a blood donor.",
+      });
+      
+      // Redirect to inventory page
+      navigate('/inventory');
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Registration failed",
+        description: "There was an error submitting your registration. Please try again.",
+        variant: "destructive"
+      });
+      setFormState(prev => ({ ...prev, submitting: false }));
+    }
   };
 
   return (
