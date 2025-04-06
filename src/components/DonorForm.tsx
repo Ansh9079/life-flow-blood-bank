@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, Clock } from 'lucide-react';
@@ -15,6 +14,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { Database } from '@/integrations/supabase/types';
 
 const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
@@ -63,7 +63,7 @@ export default function DonorForm() {
       // Store in Supabase
       const { error } = await supabase
         .from('donors')
-        .insert(donorData);
+        .insert(donorData as any);
       
       if (error) {
         console.error('Error inserting donor:', error);

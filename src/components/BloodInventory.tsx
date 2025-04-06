@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Search, Phone, MapPin, Filter, ArrowUpDown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -21,8 +20,17 @@ import {
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-// Mock data for donors
-const mockDonors = [
+type Donor = {
+  id: string | number;
+  name: string;
+  bloodType: string;
+  location: string;
+  lastDonation: string;
+  contactNumber: string;
+  status: string;
+};
+
+const mockDonors: Donor[] = [
   {
     id: 1,
     name: 'John Smith',
@@ -102,19 +110,17 @@ export default function BloodInventory() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBloodType, setSelectedBloodType] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("default");
-  const [donors, setDonors] = useState([]);
+  const [donors, setDonors] = useState<Donor[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Load donors from Supabase
   useEffect(() => {
     const fetchDonors = async () => {
       try {
         setLoading(true);
         
-        // Fetch donors from Supabase
         const { data: supabaseDonors, error } = await supabase
           .from('donors')
-          .select('*');
+          .select('*') as { data: any[], error: any };
           
         if (error) {
           console.error('Error fetching donors from Supabase:', error);
@@ -126,8 +132,7 @@ export default function BloodInventory() {
           return;
         }
 
-        // Transform Supabase data to match our app's format
-        const transformedDonors = supabaseDonors.map(donor => ({
+        const transformedDonors = supabaseDonors?.map(donor => ({
           id: donor.id,
           name: donor.name,
           bloodType: donor.blood_type,
@@ -137,8 +142,7 @@ export default function BloodInventory() {
           status: donor.status
         }));
         
-        // Combine with mock data for now (you can remove mock data later)
-        setDonors([...mockDonors, ...transformedDonors]);
+        setDonors([...mockDonors, ...(transformedDonors || [])]);
       } catch (error) {
         console.error('Error loading donors:', error);
       } finally {
@@ -149,7 +153,6 @@ export default function BloodInventory() {
     fetchDonors();
   }, [toast]);
 
-  // Filter donors based on search query and selected blood type
   const filteredDonors = donors.filter((donor) => {
     const matchesSearch = donor.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                         donor.location?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -160,7 +163,6 @@ export default function BloodInventory() {
     return matchesSearch && matchesBloodType;
   });
 
-  // Sort donors based on selected option
   const sortedDonors = [...filteredDonors].sort((a, b) => {
     switch (sortBy) {
       case 'name':
@@ -187,7 +189,6 @@ export default function BloodInventory() {
       ) : (
         <>
           <div className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Search box */}
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
@@ -198,7 +199,6 @@ export default function BloodInventory() {
               />
             </div>
             
-            {/* Blood Type Filter */}
             <div>
               <Select onValueChange={setSelectedBloodType} defaultValue="all">
                 <SelectTrigger>
@@ -221,7 +221,6 @@ export default function BloodInventory() {
               </Select>
             </div>
             
-            {/* Sort By */}
             <div>
               <Select onValueChange={setSortBy} defaultValue="default">
                 <SelectTrigger>
