@@ -97,8 +97,8 @@ const mockDonors = [
 
 export default function BloodInventory() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedBloodType, setSelectedBloodType] = useState<string>('');
-  const [sortBy, setSortBy] = useState<string>('');
+  const [selectedBloodType, setSelectedBloodType] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("default");
 
   // Filter donors based on search query and selected blood type
   const filteredDonors = mockDonors.filter((donor) => {
@@ -106,7 +106,7 @@ export default function BloodInventory() {
                           donor.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           donor.bloodType.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesBloodType = selectedBloodType ? donor.bloodType === selectedBloodType : true;
+    const matchesBloodType = selectedBloodType === "all" ? true : donor.bloodType === selectedBloodType;
     
     return matchesSearch && matchesBloodType;
   });
@@ -153,7 +153,7 @@ export default function BloodInventory() {
               </div>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Blood Types</SelectItem>
+              <SelectItem value="all">All Blood Types</SelectItem>
               <SelectItem value="A+">A+</SelectItem>
               <SelectItem value="A-">A-</SelectItem>
               <SelectItem value="B+">B+</SelectItem>
@@ -176,6 +176,7 @@ export default function BloodInventory() {
               </div>
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="default">Default</SelectItem>
               <SelectItem value="name">Name</SelectItem>
               <SelectItem value="bloodType">Blood Type</SelectItem>
               <SelectItem value="location">Location</SelectItem>

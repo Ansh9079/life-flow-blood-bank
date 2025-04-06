@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import DonatePage from "./pages/DonatePage";
 import InventoryPage from "./pages/InventoryPage";
 import AboutPage from "./pages/AboutPage";
+import DatabaseSetupPage from "./pages/DatabaseSetupPage";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/donate" element={<DonatePage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/database-setup" element={<DatabaseSetupPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
