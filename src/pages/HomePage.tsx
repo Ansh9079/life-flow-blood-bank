@@ -127,7 +127,7 @@ export default function HomePage() {
               <Button asChild size="lg" className="bg-white text-blood-700 hover:bg-gray-100">
                 <Link to="/donate">Register as Donor</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-blood-800">
+              <Button asChild variant="outline" size="lg" className="bg-white text-blood-700 hover:bg-gray-100">
                 <Link to="/inventory">Find Blood</Link>
               </Button>
             </div>

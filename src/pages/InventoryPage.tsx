@@ -49,7 +49,7 @@ export default function InventoryPage() {
                     <Phone className="h-6 w-6" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Call Us</h3>
-                  <p className="text-gray-600">(555) 123-4567</p>
+                  <p className="text-gray-600">8955055856</p>
                   <p className="text-sm text-gray-500">Available 24/7</p>
                 </div>
                 
@@ -58,7 +58,7 @@ export default function InventoryPage() {
                     <Mail className="h-6 w-6" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Email Us</h3>
-                  <p className="text-gray-600">help@lifeflow.org</p>
+                  <p className="text-gray-600">admission_bitj@bitmesra.ac.in</p>
                   <p className="text-sm text-gray-500">Response within 24 hours</p>
                 </div>
                 
@@ -67,8 +67,8 @@ export default function InventoryPage() {
                     <MapPin className="h-6 w-6" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
-                  <p className="text-gray-600">123 Lifesaving Street</p>
-                  <p className="text-sm text-gray-500">Healthcare City, HC 12345</p>
+                  <p className="text-gray-600">27, Central Road Apex Circle</p>
+                  <p className="text-sm text-gray-500">Central Road, Malviya Nagar Industrial Area, Malviya Nagar, Jaipur, Rajasthan</p>
                 </div>
               </div>
             </div>

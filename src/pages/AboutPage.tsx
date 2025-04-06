@@ -9,21 +9,21 @@ export default function AboutPage() {
   // Team members data
   const teamMembers = [
     {
-      name: "Dr. Sarah Johnson",
-      role: "Medical Director",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=300&auto=format&fit=crop",
+      name: "Ansh Grover",
+      role: "Team Member",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop",
       bio: "Dr. Johnson has over 15 years of experience in hematology and transfusion medicine."
     },
     {
-      name: "Michael Chen",
-      role: "Operations Manager",
+      name: "Anshul Batra",
+      role: "Team Member",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop",
       bio: "Michael oversees the daily operations of LifeFlow, ensuring smooth donor experiences."
     },
     {
-      name: "Maria Rodriguez",
-      role: "Community Outreach",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=300&auto=format&fit=crop",
+      name: "Mann Badaya",
+      role: "Community Manager",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300&auto=format&fit=crop",
       bio: "Maria leads our community engagement programs and donor recruitment initiatives."
     }
   ];
@@ -83,91 +83,6 @@ export default function AboutPage() {
                   className="rounded-lg shadow-lg relative z-10 w-full"
                 />
               </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Our History */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-6 md:px-12">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our History</h2>
-              <div className="space-y-8">
-                <div className="flex">
-                  <div className="mr-6 flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-blood-600 text-white flex items-center justify-center font-bold">1</div>
-                    <div className="h-full w-px bg-blood-200 mt-2"></div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">2015: The Beginning</h3>
-                    <p className="text-gray-600">
-                      LifeFlow was founded by a group of healthcare professionals who saw the need for a more efficient blood donation system. What started as a small community initiative quickly grew into a larger network.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex">
-                  <div className="mr-6 flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-blood-600 text-white flex items-center justify-center font-bold">2</div>
-                    <div className="h-full w-px bg-blood-200 mt-2"></div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">2018: Expansion</h3>
-                    <p className="text-gray-600">
-                      We expanded our operations to five major cities, partnering with local hospitals and healthcare providers to create a robust network of blood donation centers.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex">
-                  <div className="mr-6 flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-blood-600 text-white flex items-center justify-center font-bold">3</div>
-                    <div className="h-full w-px bg-blood-200 mt-2"></div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">2020: Digital Transformation</h3>
-                    <p className="text-gray-600">
-                      We launched our digital platform to connect donors and recipients more efficiently, making it easier than ever to find and donate blood.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex">
-                  <div className="mr-6 flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-blood-600 text-white flex items-center justify-center font-bold">4</div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Today: Growing Community</h3>
-                    <p className="text-gray-600">
-                      Today, LifeFlow serves thousands of donors and recipients nationwide, with plans to expand globally and continue improving blood donation accessibility.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Our Team */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-6 md:px-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Meet Our Team</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {teamMembers.map((member, index) => (
-                <div key={index} className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-60 object-cover"
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
-                    <p className="text-blood-600 font-medium mb-3">{member.role}</p>
-                    <p className="text-gray-600">{member.bio}</p>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </section>

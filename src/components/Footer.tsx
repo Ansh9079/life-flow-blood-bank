@@ -70,10 +70,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <address className="not-italic text-gray-400 space-y-2">
-              <p>123 Lifesaving Street</p>
-              <p>Healthcare City, HC 12345</p>
-              <p>Phone: (555) 123-4567</p>
-              <p>Email: contact@lifeflow.org</p>
+              <p>27, Central Road Apex Circle</p>
+              <p>Central Road, Malviya Nagar Industrial Area, Malviya Nagar, Jaipur, Rajasthan</p>
+              <p>Phone: 0141- 4019798</p>
+              <p>Email: admission_bitj@bitmesra.ac.in</p>
             </address>
           </div>
         </div>
