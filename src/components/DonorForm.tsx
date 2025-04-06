@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
-import { Check, Calendar, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,6 +19,7 @@ const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
 export default function DonorForm() {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -27,8 +29,7 @@ export default function DonorForm() {
     age: '',
     lastDonation: '',
     medicalConditions: '',
-    submitting: false,
-    submitted: false
+    submitting: false
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,38 +45,36 @@ export default function DonorForm() {
     e.preventDefault();
     setFormState(prev => ({ ...prev, submitting: true }));
     
-    // Simulate API submission with a timeout
-    setTimeout(() => {
-      toast({
-        title: "Registration successful!",
-        description: "Thank you for registering as a blood donor.",
-      });
-      setFormState(prev => ({ 
-        ...prev, 
-        submitting: false,
-        submitted: true 
-      }));
-    }, 1500);
+    // Create donor data object with current date and available status
+    const donorData = {
+      ...formState,
+      lastDonation: formState.lastDonation || new Date().toISOString().split('T')[0],
+      status: 'available'
+    };
+    
+    // Store in localStorage for now (in a real app, this would go to a database)
+    const existingDonors = JSON.parse(localStorage.getItem('donors') || '[]');
+    const updatedDonors = [...existingDonors, {
+      id: Date.now(), // Generate a simple ID
+      name: donorData.name,
+      bloodType: donorData.bloodType,
+      location: donorData.address,
+      lastDonation: donorData.lastDonation,
+      contactNumber: donorData.phone,
+      status: donorData.status
+    }];
+    
+    localStorage.setItem('donors', JSON.stringify(updatedDonors));
+    
+    // Show success toast
+    toast({
+      title: "Registration successful!",
+      description: "Thank you for registering as a blood donor.",
+    });
+    
+    // Redirect to inventory page
+    navigate('/inventory');
   };
-
-  if (formState.submitted) {
-    return (
-      <div className="bg-white p-8 rounded-xl shadow-md max-w-lg mx-auto text-center">
-        <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-green-100 mb-6">
-          <Check className="w-8 h-8 text-green-600" />
-        </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Registration Complete!</h2>
-        <p className="text-gray-600 mb-6">Thank you for registering as a blood donor. Your information has been saved in our system.</p>
-        <p className="text-gray-600 mb-8">We'll contact you soon with available donation dates and times.</p>
-        <Button 
-          onClick={() => setFormState(prev => ({ ...prev, submitted: false }))}
-          className="bg-blood-600 hover:bg-blood-700 text-white"
-        >
-          Register Another Donor
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-white p-6 md:p-8 rounded-xl shadow-md">

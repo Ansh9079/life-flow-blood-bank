@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Phone, MapPin, Filter, ArrowUpDown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -99,9 +99,16 @@ export default function BloodInventory() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBloodType, setSelectedBloodType] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("default");
+  const [donors, setDonors] = useState([]);
+
+  // Load donors from localStorage and combine with mock data
+  useEffect(() => {
+    const storedDonors = JSON.parse(localStorage.getItem('donors') || '[]');
+    setDonors([...mockDonors, ...storedDonors]);
+  }, []);
 
   // Filter donors based on search query and selected blood type
-  const filteredDonors = mockDonors.filter((donor) => {
+  const filteredDonors = donors.filter((donor) => {
     const matchesSearch = donor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           donor.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           donor.bloodType.toLowerCase().includes(searchQuery.toLowerCase());
@@ -145,7 +152,7 @@ export default function BloodInventory() {
         
         {/* Blood Type Filter */}
         <div>
-          <Select onValueChange={setSelectedBloodType} value={selectedBloodType}>
+          <Select onValueChange={setSelectedBloodType} defaultValue="all">
             <SelectTrigger>
               <div className="flex items-center">
                 <Filter className="mr-2 h-4 w-4" />
@@ -168,7 +175,7 @@ export default function BloodInventory() {
         
         {/* Sort By */}
         <div>
-          <Select onValueChange={setSortBy} value={sortBy}>
+          <Select onValueChange={setSortBy} defaultValue="default">
             <SelectTrigger>
               <div className="flex items-center">
                 <ArrowUpDown className="mr-2 h-4 w-4" />
