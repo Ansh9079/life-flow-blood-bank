@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,24 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				blood: {
+					100: '#ffebee',
+					200: '#ffcdd2',
+					300: '#ef9a9a',
+					400: '#e57373',
+					500: '#ef5350',
+					600: '#e53935',
+					700: '#d32f2f',
+					800: '#c62828',
+					900: '#b71c1c',
+				},
+				blue: {
+					100: '#e3f2fd',
+					300: '#64b5f6',
+					500: '#2196f3',
+					700: '#1976d2',
+					900: '#0d47a1',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +103,21 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' },
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse-slow 3s infinite',
+				'fade-in': 'fade-in 0.5s ease-out'
 			}
 		}
 	},
