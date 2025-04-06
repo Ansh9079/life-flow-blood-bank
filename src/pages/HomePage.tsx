@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import Stats from "@/components/Stats";
 import Footer from "@/components/Footer";
-import { ArrowRight, Calendar, CheckCircle, Shield } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -14,11 +14,6 @@ export default function HomePage() {
       icon: <Calendar className="h-10 w-10 text-blood-600" />,
       title: "Register",
       description: "Fill out our donor form with your personal and medical information."
-    },
-    {
-      icon: <Shield className="h-10 w-10 text-blood-600" />,
-      title: "Screening",
-      description: "Undergo a brief health check to ensure you're eligible to donate."
     },
     {
       icon: <CheckCircle className="h-10 w-10 text-blood-600" />,
@@ -70,7 +65,7 @@ export default function HomePage() {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {steps.map((step, index) => (
                 <div key={index} className="bg-white p-6 rounded-xl shadow-md relative">
                   <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-blood-600 text-white flex items-center justify-center font-bold text-lg">
@@ -117,13 +112,6 @@ export default function HomePage() {
                   <p className="text-gray-600">{faq.answer}</p>
                 </div>
               ))}
-            </div>
-            
-            <div className="text-center mt-10">
-              <p className="text-gray-600 mb-4">Have more questions about blood donation?</p>
-              <Button variant="outline" className="border-blood-600 text-blood-600 hover:bg-blood-50">
-                Contact Us
-              </Button>
             </div>
           </div>
         </section>
